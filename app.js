@@ -3,10 +3,13 @@ const path = require('path');
 const hbs = require('hbs')
 const bodyParser = require('body-parser');
 const app = express()
-const router = require('./routes/user')
-require('./database/Connection');
-require('dotenv').config()
 const cookieParser = require('cookie-parser')
+require('dotenv').config({path: './config/.env'})
+
+
+require('./database/Connection');
+const router = require('./routes/user')
+
 const port = process.env.PORT
 
 const viewPath = path.join(__dirname, '../MysqluaerModule/views');
@@ -20,6 +23,8 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(viewPath))
+
+//ROUTES REALTED CODE
 app.use(router);
 
 
